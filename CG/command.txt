@@ -1,0 +1,1 @@
+g++ A02.cpp -lGL -lGLU -lglut -o A02
