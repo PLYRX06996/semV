@@ -1,0 +1,388 @@
+1. Augmented Grammar:
+0: E' -> E 
+1: E -> E OR T 
+2: E -> T 
+3: T -> T AND F 
+4: T -> F 
+5: F -> NOT F 
+6: F -> ( E ) 
+7: F -> id 
+
+2, 3, 4, 5. LR(1) Sets with Lookaheads:
+I0:
+  E' -> . E , $
+  E -> . E OR T , $
+  E -> . E OR T , OR
+  E -> . T , $
+  E -> . T , OR
+  T -> . T AND F , $
+  T -> . T AND F , AND
+  T -> . T AND F , OR
+  T -> . F , $
+  T -> . F , AND
+  T -> . F , OR
+  F -> . NOT F , $
+  F -> . NOT F , AND
+  F -> . NOT F , OR
+  F -> . ( E ) , $
+  F -> . ( E ) , AND
+  F -> . ( E ) , OR
+  F -> . id , $
+  F -> . id , AND
+  F -> . id , OR
+I1:
+  E -> . E OR T , )
+  E -> . E OR T , OR
+  E -> . T , )
+  E -> . T , OR
+  T -> . T AND F , )
+  T -> . T AND F , AND
+  T -> . T AND F , OR
+  T -> . F , )
+  T -> . F , AND
+  T -> . F , OR
+  F -> . NOT F , )
+  F -> . NOT F , AND
+  F -> . NOT F , OR
+  F -> . ( E ) , )
+  F -> . ( E ) , AND
+  F -> . ( E ) , OR
+  F -> ( . E ) , $
+  F -> ( . E ) , AND
+  F -> ( . E ) , OR
+  F -> . id , )
+  F -> . id , AND
+  F -> . id , OR
+I2:
+  F -> . NOT F , $
+  F -> . NOT F , AND
+  F -> . NOT F , OR
+  F -> NOT . F , $
+  F -> NOT . F , AND
+  F -> NOT . F , OR
+  F -> . ( E ) , $
+  F -> . ( E ) , AND
+  F -> . ( E ) , OR
+  F -> . id , $
+  F -> . id , AND
+  F -> . id , OR
+I3:
+  F -> id . , $
+  F -> id . , AND
+  F -> id . , OR
+I4:
+  E' -> E . , $
+  E -> E . OR T , $
+  E -> E . OR T , OR
+I5:
+  T -> F . , $
+  T -> F . , AND
+  T -> F . , OR
+I6:
+  E -> T . , $
+  E -> T . , OR
+  T -> T . AND F , $
+  T -> T . AND F , AND
+  T -> T . AND F , OR
+I7:
+  E -> . E OR T , )
+  E -> . E OR T , OR
+  E -> . T , )
+  E -> . T , OR
+  T -> . T AND F , )
+  T -> . T AND F , AND
+  T -> . T AND F , OR
+  T -> . F , )
+  T -> . F , AND
+  T -> . F , OR
+  F -> . NOT F , )
+  F -> . NOT F , AND
+  F -> . NOT F , OR
+  F -> . ( E ) , )
+  F -> . ( E ) , AND
+  F -> . ( E ) , OR
+  F -> ( . E ) , )
+  F -> ( . E ) , AND
+  F -> ( . E ) , OR
+  F -> . id , )
+  F -> . id , AND
+  F -> . id , OR
+I8:
+  F -> . NOT F , )
+  F -> . NOT F , AND
+  F -> . NOT F , OR
+  F -> NOT . F , )
+  F -> NOT . F , AND
+  F -> NOT . F , OR
+  F -> . ( E ) , )
+  F -> . ( E ) , AND
+  F -> . ( E ) , OR
+  F -> . id , )
+  F -> . id , AND
+  F -> . id , OR
+I9:
+  F -> id . , )
+  F -> id . , AND
+  F -> id . , OR
+I10:
+  E -> E . OR T , )
+  E -> E . OR T , OR
+  F -> ( E . ) , $
+  F -> ( E . ) , AND
+  F -> ( E . ) , OR
+I11:
+  T -> F . , )
+  T -> F . , AND
+  T -> F . , OR
+I12:
+  E -> T . , )
+  E -> T . , OR
+  T -> T . AND F , )
+  T -> T . AND F , AND
+  T -> T . AND F , OR
+I13:
+  F -> NOT F . , $
+  F -> NOT F . , AND
+  F -> NOT F . , OR
+I14:
+  E -> E OR . T , $
+  E -> E OR . T , OR
+  T -> . T AND F , $
+  T -> . T AND F , AND
+  T -> . T AND F , OR
+  T -> . F , $
+  T -> . F , AND
+  T -> . F , OR
+  F -> . NOT F , $
+  F -> . NOT F , AND
+  F -> . NOT F , OR
+  F -> . ( E ) , $
+  F -> . ( E ) , AND
+  F -> . ( E ) , OR
+  F -> . id , $
+  F -> . id , AND
+  F -> . id , OR
+I15:
+  T -> T AND . F , $
+  T -> T AND . F , AND
+  T -> T AND . F , OR
+  F -> . NOT F , $
+  F -> . NOT F , AND
+  F -> . NOT F , OR
+  F -> . ( E ) , $
+  F -> . ( E ) , AND
+  F -> . ( E ) , OR
+  F -> . id , $
+  F -> . id , AND
+  F -> . id , OR
+I16:
+  E -> E . OR T , )
+  E -> E . OR T , OR
+  F -> ( E . ) , )
+  F -> ( E . ) , AND
+  F -> ( E . ) , OR
+I17:
+  F -> NOT F . , )
+  F -> NOT F . , AND
+  F -> NOT F . , OR
+I18:
+  F -> ( E ) . , $
+  F -> ( E ) . , AND
+  F -> ( E ) . , OR
+I19:
+  E -> E OR . T , )
+  E -> E OR . T , OR
+  T -> . T AND F , )
+  T -> . T AND F , AND
+  T -> . T AND F , OR
+  T -> . F , )
+  T -> . F , AND
+  T -> . F , OR
+  F -> . NOT F , )
+  F -> . NOT F , AND
+  F -> . NOT F , OR
+  F -> . ( E ) , )
+  F -> . ( E ) , AND
+  F -> . ( E ) , OR
+  F -> . id , )
+  F -> . id , AND
+  F -> . id , OR
+I20:
+  T -> T AND . F , )
+  T -> T AND . F , AND
+  T -> T AND . F , OR
+  F -> . NOT F , )
+  F -> . NOT F , AND
+  F -> . NOT F , OR
+  F -> . ( E ) , )
+  F -> . ( E ) , AND
+  F -> . ( E ) , OR
+  F -> . id , )
+  F -> . id , AND
+  F -> . id , OR
+I21:
+  E -> E OR T . , $
+  E -> E OR T . , OR
+  T -> T . AND F , $
+  T -> T . AND F , AND
+  T -> T . AND F , OR
+I22:
+  T -> T AND F . , $
+  T -> T AND F . , AND
+  T -> T AND F . , OR
+I23:
+  F -> ( E ) . , )
+  F -> ( E ) . , AND
+  F -> ( E ) . , OR
+I24:
+  E -> E OR T . , )
+  E -> E OR T . , OR
+  T -> T . AND F , )
+  T -> T . AND F , AND
+  T -> T . AND F , OR
+I25:
+  T -> T AND F . , )
+  T -> T AND F . , AND
+  T -> T AND F . , OR
+
+6. ACTION/GOTO Table Constructed:
+----------------------------------------------------------------------------------------------------
+State   (       )       AND     NOT     OR      id      $        | E     F     T     
+----------------------------------------------------------------------------------------------------
+0       S1                      S2              S3               | 4     5     6     
+1       S7                      S8              S9               | 10    11    12    
+2       S1                      S2              S3               |       13          
+3                       R7              R7              R7       |                   
+4                                       S14             acc      |                   
+5                       R4              R4              R4       |                   
+6                       S15             R2              R2       |                   
+7       S7                      S8              S9               | 16    11    12    
+8       S7                      S8              S9               |       17          
+9               R7      R7              R7                       |                   
+10              S18                     S19                      |                   
+11              R4      R4              R4                       |                   
+12              R2      S20             R2                       |                   
+13                      R5              R5              R5       |                   
+14      S1                      S2              S3               |       5     21    
+15      S1                      S2              S3               |       22          
+16              S23                     S19                      |                   
+17              R5      R5              R5                       |                   
+18                      R6              R6              R6       |                   
+19      S7                      S8              S9               |       11    24    
+20      S7                      S8              S9               |       25          
+21                      S15             R1              R1       |                   
+22                      R3              R3              R3       |                   
+23              R6      R6              R6                       |                   
+24              R1      S20             R1                       |                   
+25              R3      R3              R3                       |                   
+
+7. Conflicts:
+None detected.
+
+8. Grammar is LR(1)
+
+9, 10. LR(1) Parsing traces:
+
+Trace: id OR id AND id
+0                        id OR id AND id $        Shift 3
+0 3                      OR id AND id $           Reduce F -> id 
+0 5                      OR id AND id $           Reduce T -> F 
+0 6                      OR id AND id $           Reduce E -> T 
+0 4                      OR id AND id $           Shift 14
+0 4 14                   id AND id $              Shift 3
+0 4 14 3                 AND id $                 Reduce F -> id 
+0 4 14 5                 AND id $                 Reduce T -> F 
+0 4 14 21                AND id $                 Shift 15
+0 4 14 21 15             id $                     Shift 3
+0 4 14 21 15 3           $                        Reduce F -> id 
+0 4 14 21 15 22          $                        Reduce T -> T AND F 
+0 4 14 21                $                        Reduce E -> E OR T 
+0 4                      $                        ACCEPTED
+
+Trace: NOT id OR id
+0                        NOT id OR id $           Shift 2
+0 2                      id OR id $               Shift 3
+0 2 3                    OR id $                  Reduce F -> id 
+0 2 13                   OR id $                  Reduce F -> NOT F 
+0 5                      OR id $                  Reduce T -> F 
+0 6                      OR id $                  Reduce E -> T 
+0 4                      OR id $                  Shift 14
+0 4 14                   id $                     Shift 3
+0 4 14 3                 $                        Reduce F -> id 
+0 4 14 5                 $                        Reduce T -> F 
+0 4 14 21                $                        Reduce E -> E OR T 
+0 4                      $                        ACCEPTED
+
+Trace: (id OR id) AND id
+0                        ( id OR id ) AND id $    Shift 1
+0 1                      id OR id ) AND id $      Shift 9
+0 1 9                    OR id ) AND id $         Reduce F -> id 
+0 1 11                   OR id ) AND id $         Reduce T -> F 
+0 1 12                   OR id ) AND id $         Reduce E -> T 
+0 1 10                   OR id ) AND id $         Shift 19
+0 1 10 19                id ) AND id $            Shift 9
+0 1 10 19 9              ) AND id $               Reduce F -> id 
+0 1 10 19 11             ) AND id $               Reduce T -> F 
+0 1 10 19 24             ) AND id $               Reduce E -> E OR T 
+0 1 10                   ) AND id $               Shift 18
+0 1 10 18                AND id $                 Reduce F -> ( E ) 
+0 5                      AND id $                 Reduce T -> F 
+0 6                      AND id $                 Shift 15
+0 6 15                   id $                     Shift 3
+0 6 15 3                 $                        Reduce F -> id 
+0 6 15 22                $                        Reduce T -> T AND F 
+0 6                      $                        Reduce E -> T 
+0 4                      $                        ACCEPTED
+
+Trace: NOT (id AND id)
+0                        NOT ( id AND id ) $      Shift 2
+0 2                      ( id AND id ) $          Shift 1
+0 2 1                    id AND id ) $            Shift 9
+0 2 1 9                  AND id ) $               Reduce F -> id 
+0 2 1 11                 AND id ) $               Reduce T -> F 
+0 2 1 12                 AND id ) $               Shift 20
+0 2 1 12 20              id ) $                   Shift 9
+0 2 1 12 20 9            ) $                      Reduce F -> id 
+0 2 1 12 20 25           ) $                      Reduce T -> T AND F 
+0 2 1 12                 ) $                      Reduce E -> T 
+0 2 1 10                 ) $                      Shift 18
+0 2 1 10 18              $                        Reduce F -> ( E ) 
+0 2 13                   $                        Reduce F -> NOT F 
+0 5                      $                        Reduce T -> F 
+0 6                      $                        Reduce E -> T 
+0 4                      $                        ACCEPTED
+
+Trace: id OR AND id
+0                        id OR AND id $           Shift 3
+0 3                      OR AND id $              Reduce F -> id 
+0 5                      OR AND id $              Reduce T -> F 
+0 6                      OR AND id $              Reduce E -> T 
+0 4                      OR AND id $              Shift 14
+0 4 14                   AND id $                 REJECTED
+
+Trace: NOT OR id
+0                        NOT OR id $              Shift 2
+0 2                      OR id $                  REJECTED
+
+Trace: (id OR id
+0                        ( id OR id $             Shift 1
+0 1                      id OR id $               Shift 9
+0 1 9                    OR id $                  Reduce F -> id 
+0 1 11                   OR id $                  Reduce T -> F 
+0 1 12                   OR id $                  Reduce E -> T 
+0 1 10                   OR id $                  Shift 19
+0 1 10 19                id $                     Shift 9
+0 1 10 19 9              $                        REJECTED
+
+Trace: id AND (id OR)
+0                        id AND ( id OR ) $       Shift 3
+0 3                      AND ( id OR ) $          Reduce F -> id 
+0 5                      AND ( id OR ) $          Reduce T -> F 
+0 6                      AND ( id OR ) $          Shift 15
+0 6 15                   ( id OR ) $              Shift 1
+0 6 15 1                 id OR ) $                Shift 9
+0 6 15 1 9               OR ) $                   Reduce F -> id 
+0 6 15 1 11              OR ) $                   Reduce T -> F 
+0 6 15 1 12              OR ) $                   Reduce E -> T 
+0 6 15 1 10              OR ) $                   Shift 19
+0 6 15 1 10 19           ) $                      REJECTED
