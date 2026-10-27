@@ -1,77 +1,70 @@
 #include <GL/glut.h>
 #include <cmath>
-#include<bits/stdc++.h>
+#include <algorithm>
 
-void drawLineDDA(float x1, float y1, float x2, float y2){
-
+void drawLineDDA(float x1, float y1, float x2, float y2) {
     float dx = x2 - x1;
     float dy = y2 - y1;
 
-    float S = std::max(abs(dx), abs(dy));
+    float steps = std::max(std::abs(dx), std::abs(dy));
 
-    float Xincr = dx / S;
-    float Yincr = dy / S;
+    float xIncr = dx / steps;
+    float yIncr = dy / steps;
 
-    float x = x1;
-    float y = y1;
+    float x = x1, y = y1;
 
     glBegin(GL_POINTS);
-    for (int i = 0; i <= S; i++){
-        glVertex2i(round(x), round(y));
-        x += Xincr;
-        y += Yincr;
+    for (int i = 0; i <= (int)steps; i++) {
+        glVertex2i((int)round(x), (int)round(y));
+        x += xIncr;
+        y += yIncr;
     }
     glEnd();
 }
 
-void drawLineBH(float x1, float y1, float x2, float y2){
-    int x = round(x1);
-    int y = round(y1);
-    int x_ = round(x2);
-    int y_ = round(y2);
+void drawLineBH(float x1, float y1, float x2, float y2) {
+    int x = (int)round(x1), y = (int)round(y1);
+    int xe = (int)round(x2), ye = (int)round(y2);
 
-    int dx = abs(x_ - x);
-    int dy = abs(y_ - y);
-    int sx = (x < x_) ? 1 : -1;
-    int sy = (y < y_) ? 1 : -1;
-    int E = dx - dy;
+    int dx = std::abs(xe - x);
+    int dy = std::abs(ye - y);
+    int sx = (x < xe) ? 1 : -1;
+    int sy = (y < ye) ? 1 : -1;
+    int err = dx - dy;
 
     glBegin(GL_POINTS);
-    while (true)
-    {
+    while (true) {
         glVertex2i(x, y);
-        if(x == x_ && y == y_) break;
-        int e = 2 * E;
+        if (x == xe && y == ye) break;
 
-        if(e > -dy){
-            E -= dy;
-            x += sx;
-        }
-        if(e < dx){
-            E += dx;
-            y += sy;
-        }
+        int e2 = 2 * err;
+        if (e2 > -dy) { err -= dy; x += sx; }
+        if (e2 <  dx) { err += dx; y += sy; }
     }
     glEnd();
 }
+
 void display() {
     glClear(GL_COLOR_BUFFER_BIT);
+
     float x1 = 2.8f, y1 = 1.1f;
     float x2 = 9.2f, y2 = 4.9f;
-    glColor3f(1.0f, 0.0f, 0.0f);
-    glLineWidth(2.0f);
+
     glColor3f(0.0f, 1.0f, 0.0f);
     glPointSize(8.0f);
-
     drawLineDDA(x1, y1, x2, y2);
+
+    glColor3f(0.0f, 0.0f, 1.0f);
+    glPointSize(5.0f);
     drawLineBH(x1, y1, x2, y2);
+
     glFlush();
 }
 
 int main(int argc, char** argv) {
     glutInit(&argc, argv);
     glutInitWindowSize(500, 500);
-    glutCreateWindow("Line Drawing with Pixels and Line");
+    glutCreateWindow("Assignment 03: DDA & Bresenham (2.8,1.1) to (9.2,4.9)");
     gluOrtho2D(0.0, 12.0, 0.0, 12.0);
     glutDisplayFunc(display);
     glutMainLoop();

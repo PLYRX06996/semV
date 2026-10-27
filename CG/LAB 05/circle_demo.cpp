@@ -17,6 +17,7 @@ void midpointCircle(int xc, int yc, int r)
     int x = 0;
     int y = r;
     int p = 1 - r;
+
     glBegin(GL_POINTS);
     while (x <= y)
     {
@@ -40,7 +41,9 @@ void display()
     glClear(GL_COLOR_BUFFER_BIT);
     glColor3f(0.0f, 0.0f, 0.0f);
     glPointSize(3.0f);
+
     midpointCircle(250, 250, 100);
+
     glFlush();
 }
 
@@ -58,7 +61,7 @@ int main(int argc, char** argv)
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
     glutInitWindowSize(500, 500);
     glutInitWindowPosition(100, 100);
-    glutCreateWindow("Mid-Point Circle Algorithm");
+    glutCreateWindow("Demo Assignment 01 - Mid-Point Circle Algorithm");
     init();
     glutDisplayFunc(display);
     glutMainLoop();

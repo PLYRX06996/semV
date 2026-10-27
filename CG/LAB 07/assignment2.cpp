@@ -1,12 +1,11 @@
 #include <GL/freeglut.h>
-#include <bits/stdc++.h>
-using namespace std;
+#include <vector>
 
 struct Point3D {
     float x, y, z;
 };
 
-vector<Point3D> controlPoints = {
+const std::vector<Point3D> controlPoints = {
     {3.0f, 1.5f, 0.0f},
     {4.5f, 1.0f, 0.0f},
     {6.5f, 1.2f, 0.0f},
@@ -55,7 +54,7 @@ int main(int argc, char** argv)
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
     glutInitWindowSize(600, 600);
-    glutCreateWindow("Assignment 2 - Localized Control Points");
+    glutCreateWindow("Assignment 02 - Localized Control Points on Mouse Boundary");
     init();
     glutDisplayFunc(display);
     glutMainLoop();

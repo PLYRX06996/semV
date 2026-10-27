@@ -1,0 +1,4 @@
+yacc -d program.y
+lex program.l
+gcc y.tab.c lex.yy.c -o program
+./program

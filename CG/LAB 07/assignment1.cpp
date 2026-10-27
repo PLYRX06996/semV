@@ -1,6 +1,6 @@
 #include <GL/freeglut.h>
-#include <bits/stdc++.h>
-using namespace std;
+#include <vector>
+#include <cmath>
 
 void display()
 {
@@ -12,7 +12,17 @@ void display()
     float x3 = 8.0f, y3 = 2.0f;
 
     glColor3f(0.6f, 0.6f, 0.6f);
+    glLineWidth(1.5f);
     glBegin(GL_LINE_STRIP);
+        glVertex2f(x0, y0);
+        glVertex2f(x1, y1);
+        glVertex2f(x2, y2);
+        glVertex2f(x3, y3);
+    glEnd();
+
+    glColor3f(1.0f, 0.0f, 0.0f);
+    glPointSize(8.0f);
+    glBegin(GL_POINTS);
         glVertex2f(x0, y0);
         glVertex2f(x1, y1);
         glVertex2f(x2, y2);
@@ -26,17 +36,18 @@ void display()
     {
         float t = i / 100.0f;
         float u = 1.0f - t;
-        float x = u*u*u*x0
-                + 3*u*u*t*x1
-                + 3*u*t*t*x2
-                + t*t*t*x3;
-        float y = u*u*u*y0
-                + 3*u*u*t*y1
-                + 3*u*t*t*y2
-                + t*t*t*y3;
+        float x = u * u * u * x0
+                + 3 * u * u * t * x1
+                + 3 * u * t * t * x2
+                + t * t * t * x3;
+        float y = u * u * u * y0
+                + 3 * u * u * t * y1
+                + 3 * u * t * t * y2
+                + t * t * t * y3;
         glVertex2f(x, y);
     }
     glEnd();
+
     glFlush();
 }
 
@@ -53,7 +64,7 @@ int main(int argc, char** argv)
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
     glutInitWindowSize(600, 600);
-    glutCreateWindow("Cubic Bezier Spline Demo");
+    glutCreateWindow("Assignment 01 - Cubic Bezier Spline Demo");
     init();
     glutDisplayFunc(display);
     glutMainLoop();
